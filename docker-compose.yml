@@ -13,6 +13,8 @@ services:
       - .:/var/www
     networks:
       - laravel
+    depends_on:
+      - postgres
 
   # Nginx Web Server Service
   web:
@@ -28,6 +30,24 @@ services:
     depends_on:
       - app
 
+  # PostgreSQL Database Service
+  postgres:
+    image: postgres:15-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: sigcap
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - laravel
+
 networks:
   laravel:
     driver: bridge
+
+volumes:
+  postgres_data:
