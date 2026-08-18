@@ -55,4 +55,4 @@ p h p s t a n /
 /.composer
 /.config
 /composer-setup.php
-*~*
+*~*database/backup_sigcap.dump
